@@ -13,7 +13,7 @@ class GalleryController extends Controller
     public function index()
     {
         return view('admin.gallery.index', [
-            'galleries' => Gallery::orderById('DESC')->paginate(10)
+            'galleries' => Gallery::latest()->paginate(10)
         ]);
     }
 
@@ -22,16 +22,44 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.gallery.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+   public function store(Request $request)
+{
+    $request->validate([
+        'type' => 'required',
+        'file' => 'required_if:type,image',
+        'file.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'video' => 'required_if:type,video'
+    ]);
+
+    if ($request->type === 'image') {
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $file) {
+                $imageName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images'), $imageName);
+
+                $gallery = new Gallery();
+                $gallery->type = 'image';
+                $gallery->file = $imageName;
+                $gallery->save();
+            }
+        }
+    } elseif ($request->type === 'video') {
+        $gallery = new Gallery();
+        $gallery->type = 'video';
+        $gallery->file = $request->video;
+        $gallery->save();
     }
+
+    return redirect()->route('galleries.index')->with('success', 'Gallery created successfully.');
+}
+
+    
 
     /**
      * Display the specified resource.
@@ -62,6 +90,8 @@ class GalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       Gallery::where('id', $id)->delete();
+    return back()->with('success', 'Gallery deleted successfully.');
+
     }
 }
