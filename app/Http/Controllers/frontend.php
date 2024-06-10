@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class frontend extends Controller
@@ -16,7 +17,9 @@ class frontend extends Controller
         return view("frontend.services");
     }
     public function Doctors (){
-        return view("frontend.doctors");
+        return view("frontend.doctors", [
+            'doctors' => Doctor::latest()->get()
+        ]);
     }
     public function Career (){
         return view("frontend.career.index");
