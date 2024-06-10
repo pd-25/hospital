@@ -74,15 +74,15 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white py-3"> <a href="#" class="navbar-brand font-weight-bold d-block d-lg-none"></a> <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"> <span class="navbar-toggler-icon"></span> </button>
             <div id="navbarContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="index.html" class="nav-link font-weight-bold text-uppercase">Home</a></li>
+                <li class="nav-item"><a href="{{route('home')}}" class="nav-link font-weight-bold text-uppercase">Home</a></li>
                    
-                    <li class="nav-item"><a href="about-us.html" class="nav-link font-weight-bold text-uppercase">About</a></li>
-                    <li class="nav-item"><a href="services.html" class="nav-link font-weight-bold text-uppercase">Services</a></li>			
-                    <li class="nav-item"><a href="doctors.html" class="nav-link font-weight-bold text-uppercase">Doctors</a></li>
-                    <li class="nav-item"><a href="courses.html" class="nav-link font-weight-bold text-uppercase">Courses</a></li>
-                    <li class="nav-item"><a href="career.html" class="nav-link font-weight-bold text-uppercase">Career</a></li>
-                    <li class="nav-item"><a href="news.html" class="nav-link font-weight-bold text-uppercase">News</a></li>
-                    <li class="nav-item"><a href="contact-us.html" class="nav-link font-weight-bold text-uppercase">Contact Us</a></li>
+                    <li class="nav-item"><a href="{{asset('about-us')}}" class="nav-link font-weight-bold text-uppercase">About</a></li>
+                    <li class="nav-item"><a href="{{asset('services')}}" class="nav-link font-weight-bold text-uppercase">Services</a></li>			
+                    <li class="nav-item"><a href="{{asset('doctors')}}" class="nav-link font-weight-bold text-uppercase">Doctors</a></li>
+                    <li class="nav-item"><a href="{{asset('courses')}}" class="nav-link font-weight-bold text-uppercase">Courses</a></li>
+                    <li class="nav-item"><a href="{{asset('career')}}" class="nav-link font-weight-bold text-uppercase">Career</a></li>
+                    <li class="nav-item"><a href="{{asset('news')}}" class="nav-link font-weight-bold text-uppercase">News</a></li>
+                    <li class="nav-item"><a href="{{asset('contact-us')}}" class="nav-link font-weight-bold text-uppercase">Contact Us</a></li>
                 </ul>
             </div>
         </nav>
