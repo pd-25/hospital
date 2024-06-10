@@ -16,15 +16,14 @@ class DoctorCOnteoller extends Controller
     {
         $this->doctorInterface = $doctorInterface;
     }
-    public function index(){
-
-        return 'Under Work';
-        // return view('admin.blog.index')->with('blogs', $this->doctorInterface->getAllDoctors()->paginate(10));
+    public function index()
+    {
+        return view('admin.doctor.index')->with('doctors', $this->doctorInterface->getAllDoctors()->paginate(10));
     }
 
     public function create()
     {
-        return view('admin.blog.create');
+        return view('admin.doctor.create');
     }
 
     /**
@@ -33,13 +32,14 @@ class DoctorCOnteoller extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'string',
-            'description' => 'string|max:5000',
+            'title' => 'required|string',
+            'degree' => 'required|string|max:50',
+            'available_on' => 'required|string|max:50',
             'image' => 'required',
         ]);
-        $data = $request->only('title', 'description', 'image');
+        $data = $request->only('title', 'degree', 'available_on', 'image', 'type');
         $slug = Str::slug($data['title']);
-        $slug_count = DB::table('blogs')->where('slug', $slug)->count();
+        $slug_count = DB::table('doctors')->where('slug', $slug)->count();
         if ($slug_count > 0) {
             $slug = time() . rand(100000, 999999) . '-' . $slug;
         }
@@ -49,26 +49,18 @@ class DoctorCOnteoller extends Controller
 
             $blog_image = time() . rand(0000, 9999) . '.' . $image->getClientOriginalExtension();
 
-            $image->storeAs('public/BlogImage', $blog_image);
+            $image->storeAs('public/DoctorImage', $blog_image);
 
-            $data['image'] = 'BlogImage/' . $blog_image;
+            $data['image'] = 'DoctorImage/' . $blog_image;
         }
         $data['created_at'] = now();
 
-        $store = DB::table('blogs')->insert($data);
+        $store = DB::table('doctors')->insert($data);
         if ($store) {
-            return redirect('admin/blogs')->with('msg', 'New Blog Inserted Successfully');
+            return redirect('admin/doctors')->with('msg', 'New Doctors Inserted Successfully');
         } else {
             return redirect()->back()->with('msg', 'Some Error Occur!');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -76,7 +68,7 @@ class DoctorCOnteoller extends Controller
      */
     public function edit(string $slug)
     {
-        return view('admin.blog.edit')->with('blog', $this->doctorInterface->singleDoctor($slug));
+        return view('admin.doctor.edit')->with('doctor', $this->doctorInterface->singleDoctor($slug));
     }
 
     /**
@@ -85,25 +77,26 @@ class DoctorCOnteoller extends Controller
     public function update(Request $request, string $slug)
     {
         $request->validate([
-            'title' => 'string',
-            'description' => 'string|max:5000',
+            'title' => 'required|string',
+            'degree' => 'required|string|max:50',
+            'available_on' => 'required|string|max:50',
         ]);
-        $img = DB::table('blogs')->where('slug', $slug)->select('image')->first();
-        $data = $request->only('title', 'description');
+        $img = DB::table('doctors')->where('slug', $slug)->select('image')->first();
+        $data = $request->only('title', 'degree', 'available_on', 'type');
         if ($request->has('image')) {
-            File::delete('storage/BlogImage/' . $img->image);
+            File::delete('storage/DoctorImage/' . $img->image);
 
             $image = $request->file('image');
             $blog_img = time() . rand(0000, 9999) . '.' . $image->getClientOriginalExtension();
 
-            $image->storeAs('public/BlogImage', $blog_img);
+            $image->storeAs('public/DoctorImage', $blog_img);
 
-            $data['image'] = 'BlogImage/' . $blog_img;
+            $data['image'] = 'DoctorImage/' . $blog_img;
         }
 
         $update = Doctor::where('slug', $slug)->update($data);
         if ($update) {
-            return redirect('admin/blogs')->with('msg', 'Blog is Updated Successfully');
+            return redirect('admin/doctors')->with('msg', 'Doctor is Updated Successfully');
         } else {
             return redirect()->back()->with('msg', 'Some Error Occured!');
         }
