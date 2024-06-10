@@ -34,12 +34,12 @@
             </a>
         </li>
 
-           {{--<li class="nav-item {{ Route::is('case-studies.index') ? 'active' : '' }}">
-            <a class="nav-link " href="{{route('case-studies.index')}}">
+        <li class="nav-item {{ Route::is('galleries.index') ? 'active' : '' }}">
+            <a class="nav-link " href="{{route('galleries.index')}}">
                 <i class="ri-group-fill"></i>
-                <span>Case Study</span>
+                <span>Galleries</span>
             </a>
-        </li> --}}
+        </li>
 
         <li class="nav-item {{ Route::is('news-events.index') ? 'active' : '' }}">
             <a class="nav-link " href="{{route('news-events.index')}}">

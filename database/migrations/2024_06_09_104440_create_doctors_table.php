@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->text('title');
+            $table->string('type');
             $table->string('image')->nullable();
             $table->string('available_on');
-            $table->longText('description');
+            $table->longText('degree');
             $table->timestamps();
         });
     }

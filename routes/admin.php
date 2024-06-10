@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\casestudy\CaseStudyController;
 use App\Http\Controllers\admin\dashboard\DashboardController;
 use App\Http\Controllers\admin\doctor\DoctorCOnteoller;
 use App\Http\Controllers\admin\news\NewsController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('admin/login', [AuthController::class, 'showLogin'])->name('admin.showlogin');
@@ -18,9 +19,10 @@ Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::get('/applications', [CareerController::class, 'getApplication'])->name('admin.getApplication');
     Route::delete('/applications/{slug}', [CareerController::class, 'deleteApplication'])->name('admin.deleteApplication');
     Route::resource('news-events', NewsController::class);
-    Route::resource('blogs', BlogController::class);
+    // Route::resource('blogs', BlogController::class);
     Route::resource('doctors', DoctorCOnteoller::class);
-    Route::resource('case-studies', CaseStudyController::class);
+    Route::resource('galleries', GalleryController::class);
+    // Route::resource('case-studies', CaseStudyController::class);
 
     Route::get('log-out', [AuthController::class, 'adminLogout'])->name('admin.logout');
 });
