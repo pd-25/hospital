@@ -9,7 +9,6 @@
             </div>
         </div>
     </section>
-    <!-- Page Content -->
 
 
     <section id="docPG-section">
@@ -38,9 +37,10 @@
                                 </div>
                                 <div class="expert-box-ctn">
                                     <h4>{{ $doctorM->title }}</h4>
-                                    <p>{{ $doctorM->degree }}</p>
-                                    <p>{{ $doctorM->available_on }}</p>
-                                    {{-- <a href="single-doctors.html" class="bbBox-btn">Read More</a> --}}
+                                    <p class="listing-certificate sing-listing"><i class="fa fa-certificate"
+                                            aria-hidden="true"></i> {{ $doctorM->degree }}</p>
+                                    <p class="listing-date sing-listing mb-3"><i class="fa fa-calendar"
+                                            aria-hidden="true"></i> <b>Available on:</b> {{ $doctorM->available_on }}</p>
                                 </div>
                             </div>
                         </div>
@@ -74,9 +74,12 @@
                                 </div>
                                 <div class="expert-box-ctn">
                                     <h4>{{ $doctorSa->title }}</h4>
-                                    <p>{{ $doctorSa->degree }}</p>
-                                    <p>{{ $doctorSa->available_on }}</p>
-                                    {{-- <a href="single-doctors.html" class="bbBox-btn">Read More</a> --}}
+
+                                    <p class="listing-certificate sing-listing"><i class="fa fa-certificate"
+                                            aria-hidden="true"></i> {{ $doctorSa->degree }}</p>
+                                    <p class="listing-date sing-listing mb-3"><i class="fa fa-calendar"
+                                            aria-hidden="true"></i> <b>Available on:</b> {{ $doctorSa->available_on }}</p>
+
                                 </div>
                             </div>
                         </div>

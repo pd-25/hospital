@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('contact_us', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->string('full_name');
+            // $table->string('slug')->unique();
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('form_Phone');
             $table->string('form_Email');
             $table->text('form_message');
-            $table->string('type')->comment('Booking Appoinment and Contact Us');
             $table->timestamps();
         });
     }
