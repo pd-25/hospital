@@ -6,6 +6,21 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('optimize', function () {
+
+    \Artisan::call('optimize:clear');
+
+    dd("optimize is cleared");
+
+});
+
+Route::get('storage', function () {
+
+    \Artisan::call('storage:link');
+
+    dd("storage is link");
+
+});
 
 Route::get('/', [frontend::class, 'Index'])->name('home');
 Route::get('/about-us', [frontend::class, 'AboutUs'])->name('about');
